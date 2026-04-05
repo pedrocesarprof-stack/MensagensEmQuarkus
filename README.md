@@ -1,62 +1,51 @@
-# mensagensemquarkus
+# Mensagens em Quarkus
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+API REST simples para cadastro e consulta de mensagens.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+## Rodar local
 
-## Running the application in dev mode
-
-You can run your application in dev mode that enables live coding using:
-
-```shell script
-./mvnw quarkus:dev
+```powershell
+.\mvnw.cmd quarkus:dev
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+API: `http://localhost:8080`
 
-## Packaging and running the application
+## Endpoints
 
-The application can be packaged using:
+- `POST /mensagens` - cria mensagem
+- `GET /mensagens` - lista mensagens
+- `GET /mensagens/{id}` - busca por id
+- `DELETE /mensagens/{id}` - remove por id
 
-```shell script
-./mvnw package
+Exemplo de body para `POST /mensagens`:
+
+```json
+{
+  "remetente": "Pedro",
+  "conteudo": "Mensagem de teste"
+}
 ```
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+## Evidencias de testes (substituir depois)
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+### Cadastro - `POST /mensagens`
+Resultado esperado: mensagem criada com sucesso (status `201`).
 
-If you want to build an _über-jar_, execute the following command:
+![Teste POST criar](docs/images/testes/01-post-criar.png)
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+### Listagem - `GET /mensagens`
+Resultado esperado: retorno da lista de mensagens (status `200`).
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+![Teste GET listar](docs/images/testes/02-get-listar.png)
 
-## Creating a native executable
+### Busca por id - `GET /mensagens/{id}`
+Resultado esperado: retorno da mensagem correspondente ao id (status `200`).
 
-You can create a native executable using:
+![Teste GET por id](docs/images/testes/03-get-por-id.png)
 
-```shell script
-./mvnw package -Dnative
-```
+### Delecao - `DELETE /mensagens/{id}`
+Resultado esperado: mensagem removida com sucesso (status `200`).
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/mensagensemquarkus-1.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Provided Code
-
-### REST
-
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+![Teste DELETE - cenario 1](docs/images/testes/04-delete-01.png)
+![Teste DELETE - cenario 2](docs/images/testes/04-delete-02.png)
+![Teste DELETE - cenario 3](docs/images/testes/04-delete-03.png)
