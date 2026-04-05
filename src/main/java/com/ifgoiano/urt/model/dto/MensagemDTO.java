@@ -1,5 +1,6 @@
 package com.ifgoiano.urt.model.dto;
 
+import io.smallrye.common.constraint.NotNull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,12 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class MensagemDTO {
     private Long id;
-    private String remetende;
+
+    @NotNull
+    private String remetente;
+
+    @NotNull
     private String conteudo;
+
     private LocalDateTime timestamp;
 }
